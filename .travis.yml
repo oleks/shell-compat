@@ -2,5 +2,14 @@ language: c
 os:
   - linux
   - osx
+addons:
+  apt:
+    packages:
+      - bash
+      - zsh
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install bash zsh; fi
 script:
   - ./test-fails.sh bash ./pipefail.sh
+  - ./test-fails.sh zsh ./pipefail.sh
